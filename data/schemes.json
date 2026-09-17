@@ -1,0 +1,59 @@
+[
+    {
+        "name": "National Scholarship Scheme",
+        "category": "education",
+        "description": "Financial support for eligible students pursuing education.",
+        "min_age": 14,
+        "max_age": 30,
+        "states": ["all"],
+        "max_income": 300000,
+        "occupations": ["student"],
+        "social_categories": ["general", "obc", "sc", "st"],
+        "official_link": "https://scholarships.gov.in/"
+    },
+    {
+        "name": "Student Support Scheme",
+        "category": "education",
+        "description": "Support for students from eligible lower-income families.",
+        "min_age": 16,
+        "max_age": 30,
+        "states": ["punjab", "haryana", "delhi"],
+        "max_income": 500000,
+        "occupations": ["student"],
+        "social_categories": ["general", "obc", "sc", "st"],
+        "official_link": "https://www.myscheme.gov.in/"
+    },
+    {
+        "name": "Youth Employment Support",
+        "category": "employment",
+        "description": "A sample scheme for eligible unemployed young people.",
+        "min_age": 18,
+        "max_age": 35,
+        "states": ["all"],
+        "max_income": 500000,
+        "occupations": ["unemployed"],
+        "social_categories": ["general", "obc", "sc", "st"],
+        "official_link": "https://www.myscheme.gov.in/"
+    },
+    {
+        "name": "Farmer Support Scheme",
+        "category": "agriculture",
+        "description": "A sample scheme for eligible farmers.",
+        "min_age": 18,
+        "max_age": 70,
+        "states": ["all"],
+        "max_income": 500000,
+        "occupations": ["farmer"],
+        "social_categories": ["general", "obc", "sc", "st"],
+
+        "documents": [
+        "Aadhaar Card",
+        "Income Certificate",
+        "Student ID / Bonafide Certificate",
+        "Bank Account Proof"
+
+        ],
+
+        "official_link": "https://www.myscheme.gov.in/"
+    }
+]
