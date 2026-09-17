@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Your Schemes - SchemeSaathi</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+
+        <h2>SchemeSaathi</h2>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/eligibility">Check Eligibility</a>
+        </nav>
+
+    </header>
+
+
+    <main>
+
+        <section class="results-section">
+
+            <h1>Schemes For You</h1>
+
+            <p>
+                These are schemes from our current dataset that may
+                be relevant to you.
+            </p>
+
+
+            {% for scheme in schemes %}
+
+                <div class="scheme-card">
+
+                    <h2>{{ scheme.name }}</h2>
+
+                    <p>
+                        {{ scheme.description }}
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong>
+                        {{ scheme.category }}
+                    </p>
+
+                    <a href="{{ scheme.official_link }}"
+                       target="_blank">
+                        Visit Official Website
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+
+            <br>
+
+            <a href="/eligibility">
+                Check Again
+            </a>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
