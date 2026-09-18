@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Your Schemes - SchemeSaathi</title>
+    <title>My Schemes - SchemeSaathi</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -18,7 +18,8 @@
 
         <nav>
             <a href="/">Home</a>
-            <a href="/eligibility">Check Eligibility</a>
+            <a href="/my-schemes">My Schemes</a>
+            <a href="/eligibility">My Profile</a>
         </nav>
 
     </header>
@@ -30,42 +31,89 @@
 
             <h1>Schemes For You</h1>
 
-            <p>
-                These are schemes from our current dataset that may
-                be relevant to you.
-            </p>
+            {% if schemes %}
+
+                <p>
+                    We found {{ schemes|length }} scheme(s) that may be
+                    relevant to your profile.
+                </p>
 
 
-            {% for scheme in schemes %}
+                {% for scheme in schemes %}
 
-                <div class="scheme-card">
+                    <div class="scheme-card">
 
-                    <h2>{{ scheme.name }}</h2>
+                        <h2>{{ scheme.name }}</h2>
+
+                        <p>
+                            {{ scheme.description }}
+                        </p>
+
+                        <p>
+                            <strong>Category:</strong>
+                            {{ scheme.category|title }}
+                        </p>
+
+
+                        <h3>Why this scheme may be relevant</h3>
+
+                        <ul>
+
+                            {% for reason in scheme.reasons %}
+
+                                <li>{{ reason }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+
+                        <h3>Documents you may need</h3>
+
+                        <ul>
+
+                            {% for document in scheme.documents %}
+
+                                <li>{{ document }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+
+                        <a
+                            href="{{ scheme.official_link }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="apply-button"
+                        >
+                            View Official Application
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <div class="no-results">
+
+                    <h2>No matching schemes found</h2>
 
                     <p>
-                        {{ scheme.description }}
+                        We couldn't find a scheme matching the information
+                        in your current profile.
                     </p>
 
-                    <p>
-                        <strong>Category:</strong>
-                        {{ scheme.category }}
-                    </p>
-
-                    <a href="{{ scheme.official_link }}"
-                       target="_blank">
-                        Visit Official Website
+                    <a href="/eligibility">
+                        Update My Profile
                     </a>
 
                 </div>
 
-            {% endfor %}
+            {% endif %}
 
-
-            <br>
-
-            <a href="/eligibility">
-                Check Again
-            </a>
 
         </section>
 

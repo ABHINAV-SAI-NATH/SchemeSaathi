@@ -23,58 +23,162 @@
 
 
     <main>
+<main>
 
-        <section class="hero">
+    <section class="hero">
 
-            <h1>
-                Find Government Schemes
-                Made For You
-            </h1>
+        {% if profile %}
 
-            <p>
-                Discover government schemes you may be eligible for
-                through a simple questionnaire.
-            </p>
+            <div class="hero-content">
 
-            <a href="/eligibility">
-                <button>
-                    Check My Eligibility
-                </button>
-            </a>
-        </section>
+                <p class="eyebrow">PERSONALIZED FOR YOU</p>
 
+                <h1>Welcome back 👋</h1>
 
-        <section class="categories">
+                <p>
+                    Discover government schemes that may be relevant
+                    to your profile — all in one place.
+                </p>
 
-            <h2>Explore Schemes</h2>
+                <div class="hero-actions">
 
-            <div class="category-container">
+                    <a href="/my-schemes" class="hero-button">
+                        View My Schemes
+                    </a>
 
-                <div class="category-card">
-                    🎓
-                    <h3>Education</h3>
-                </div>
+                    <a href="/eligibility" class="secondary-button">
+                        Update Profile
+                    </a>
 
-                <div class="category-card">
-                    🏥
-                    <h3>Health</h3>
-                </div>
-
-                <div class="category-card">
-                    💼
-                    <h3>Employment</h3>
-                </div>
-
-                <div class="category-card">
-                    🏠
-                    <h3>Housing</h3>
                 </div>
 
             </div>
 
-        </section>
+        {% else %}
 
-    </main>
+            <div class="hero-content">
+
+                <p class="eyebrow">GOVERNMENT BENEFITS, SIMPLIFIED</p>
+
+                <h1>Find Government Schemes Made For You</h1>
+
+                <p>
+                    Tell us a little about yourself and discover
+                    government schemes that may be relevant to you.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a href="/eligibility" class="hero-button">
+                        Set Up My Profile
+                    </a>
+
+                    <a href="#" class="secondary-button">
+                        Explore Schemes
+                    </a>
+
+                </div>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    {% if profile %}
+
+    <section class="quick-section">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">YOUR PROFILE</p>
+
+            <h2>Your information</h2>
+
+            <p>
+                SchemeSaathi uses your profile to find potentially
+                relevant schemes.
+            </p>
+
+        </div>
+
+
+        <div class="profile-summary">
+
+            <div class="summary-item">
+                <span>Age</span>
+                <strong>{{ profile.age }}</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>State</span>
+                <strong>{{ profile.state|replace('_', ' ')|title }}</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>Status</span>
+                <strong>{{ profile.occupation|replace('_', ' ')|title }}</strong>
+            </div>
+
+            <div class="summary-item">
+                <span>Category</span>
+                <strong>{{ profile.category|upper }}</strong>
+            </div>
+
+        </div>
+
+    </section>
+
+    {% endif %}
+
+
+    <section class="categories">
+
+        <div class="section-heading">
+
+            <p class="eyebrow">EXPLORE</p>
+
+            <h2>Explore schemes by category</h2>
+
+            <p>
+                Browse government support across different areas.
+            </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <span class="category-icon">🎓</span>
+                <h3>Education</h3>
+                <p>Scholarships and student support.</p>
+            </div>
+
+            <div class="category-card">
+                <span class="category-icon">💼</span>
+                <h3>Employment</h3>
+                <p>Jobs, training and employment support.</p>
+            </div>
+
+            <div class="category-card">
+                <span class="category-icon">🏠</span>
+                <h3>Housing</h3>
+                <p>Housing and financial assistance.</p>
+            </div>
+
+            <div class="category-card">
+                <span class="category-icon">🌾</span>
+                <h3>Agriculture</h3>
+                <p>Support and benefits for farmers.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
 
 </body>
 </html>

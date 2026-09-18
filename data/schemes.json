@@ -9,6 +9,12 @@
         "max_income": 300000,
         "occupations": ["student"],
         "social_categories": ["general", "obc", "sc", "st"],
+        "documents": [
+            "Aadhaar Card",
+            "Residence Proof",
+            "Educational Certificate",
+            "Bank Account Proof"
+        ],
         "official_link": "https://scholarships.gov.in/"
     },
     {
@@ -21,6 +27,12 @@
         "max_income": 500000,
         "occupations": ["student"],
         "social_categories": ["general", "obc", "sc", "st"],
+        "documents": [
+            "Aadhaar Card",
+            "Income Certificate",
+            "Residence Proof",
+            "Student ID / Bonafide Certificate"
+        ],
         "official_link": "https://www.myscheme.gov.in/"
     },
     {
@@ -33,6 +45,12 @@
         "max_income": 500000,
         "occupations": ["unemployed"],
         "social_categories": ["general", "obc", "sc", "st"],
+        "documents": [
+            "Aadhaar Card",
+            "Residence Proof",
+            "Educational Certificate",
+            "Bank Account Proof"
+        ],
         "official_link": "https://www.myscheme.gov.in/"
     },
     {
