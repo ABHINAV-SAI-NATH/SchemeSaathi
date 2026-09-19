@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · SchemeSaathi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #16261f;
+      --muted: #52645c;
+      --page: #edf2ef;
+      --card: #ffffff;
+      --line: #c9d6d0;
+      --accent: #0e5a48;
+      --accent-dark: #0a4739;
+      --error: #a3261f;
+      --error-bg: #fbeceb;
+      --ok: #0e5a48;
+      --ok-bg: #e4f1ec;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Mukta", system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.5;
+      color: var(--ink);
+      background: var(--page);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin: 0 0 20px;
+      color: var(--accent);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 28px 24px 24px;
+    }
+
+    h1 {
+      font-size: 1.7rem;
+      line-height: 1.2;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+
+    .lede {
+      margin: 0 0 22px;
+      color: var(--muted);
+    }
+
+    .switch {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+      padding: 4px;
+      margin-bottom: 22px;
+      background: var(--page);
+      border-radius: 10px;
+    }
+
+    .switch button {
+      font: inherit;
+      font-weight: 600;
+      padding: 9px 8px;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .switch button[aria-pressed="true"] {
+      background: var(--card);
+      color: var(--ink);
+      box-shadow: 0 0 0 1px var(--line);
+    }
+
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 4px 0 0;
+    }
+
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%;
+      font: inherit;
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 64px; }
+
+    .pw-toggle {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: transparent;
+      border: 0;
+      padding: 6px 8px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    :focus-visible {
+      outline: 3px solid #f2b632;
+      outline-offset: 2px;
+    }
+
+    .submit {
+      width: 100%;
+      font: inherit;
+      font-weight: 700;
+      padding: 12px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--accent);
+      color: #fff;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .submit:hover:not(:disabled) { background: var(--accent-dark); }
+    .submit:disabled { opacity: 0.65; cursor: progress; }
+
+    .forgot {
+      display: block;
+      margin: 14px 0 0;
+      font: inherit;
+      font-weight: 600;
+      color: var(--accent);
+      background: none;
+      border: 0;
+      padding: 4px 0;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .forgot[hidden] { display: none; }
+
+    .msg {
+      margin: 0 0 16px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      font-size: 0.95rem;
+    }
+
+    .msg[hidden] { display: none; }
+    .msg.error { background: var(--error-bg); color: var(--error); }
+    .msg.ok { background: var(--ok-bg); color: var(--ok); }
+
+    .back {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="brand">SchemeSaathi</p>
+
+    <div class="card">
+      <h1 id="title">Sign in to check your schemes</h1>
+      <p class="lede" id="lede">
+        Sign in, answer a few questions about yourself, and see which government schemes you qualify for.
+      </p>
+
+      <div class="switch" role="group" aria-label="Choose sign in or create account">
+        <button type="button" id="tab-signin" aria-pressed="true">Sign in</button>
+        <button type="button" id="tab-signup" aria-pressed="false">Create account</button>
+      </div>
+
+      <div id="message" class="msg" role="alert" aria-live="polite" hidden></div>
+
+      <form id="auth-form" novalidate>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" inputmode="email"
+                 autocomplete="username" autocapitalize="none" spellcheck="false" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="pw-wrap">
+            <input id="password" name="password" type="password"
+                   autocomplete="current-password" minlength="6" required>
+            <button type="button" class="pw-toggle" id="pw-toggle" aria-label="Show password">Show</button>
+          </div>
+          <p class="hint" id="pw-hint" hidden>Use at least 6 characters.</p>
+        </div>
+
+        <button type="submit" class="submit" id="submit">Sign in</button>
+        <button type="button" class="forgot" id="forgot">Forgot password?</button>
+      </form>
+    </div>
+
+    <a class="back" href="/">Back to home</a>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      sendPasswordResetEmail
+    } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+    // Your Firebase web config (these values are safe to expose in the browser).
+    const firebaseConfig = {
+      apiKey: "AIzaSyALslC7PSTeFbDhzWcFRRYrKLoJf2pKq0A",
+      authDomain: "sceamsatthi.firebaseapp.com",
+      projectId: "sceamsatthi",
+      storageBucket: "sceamsatthi.firebasestorage.app",
+      messagingSenderId: "906997337239",
+      appId: "1:906997337239:web:f879c43103455fd3fa2dd2",
+      measurementId: "G-XXM476RS2L"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Analytics is optional; it must never block login if it fails to load.
+    import("https://www.gstatic.com/firebasejs/12.19.0/firebase-analytics.js")
+      .then(({ getAnalytics }) => getAnalytics(app))
+      .catch(() => {});
+
+    const NEXT = {{ next|tojson }};
+
+    let mode = "signin";
+
+    const $ = (id) => document.getElementById(id);
+    const form = $("auth-form");
+    const emailEl = $("email");
+    const passEl = $("password");
+    const submitBtn = $("submit");
+    const msgEl = $("message");
+
+    const COPY = {
+      signin: {
+        title: "Sign in to check your schemes",
+        lede: "Sign in, answer a few questions about yourself, and see which government schemes you qualify for.",
+        button: "Sign in",
+        busy: "Signing in…",
+        autocomplete: "current-password"
+      },
+      signup: {
+        title: "Create your account",
+        lede: "It takes a minute. Then you'll answer a few questions and see the schemes you qualify for.",
+        button: "Create account",
+        busy: "Creating account…",
+        autocomplete: "new-password"
+      }
+    };
+
+    function showMessage(text, kind) {
+      msgEl.textContent = text;
+      msgEl.className = "msg " + kind;
+      msgEl.hidden = false;
+    }
+
+    function clearMessage() {
+      msgEl.hidden = true;
+      msgEl.textContent = "";
+    }
+
+    function setMode(next) {
+      mode = next;
+      const c = COPY[mode];
+      $("title").textContent = c.title;
+      $("lede").textContent = c.lede;
+      submitBtn.textContent = c.button;
+      passEl.autocomplete = c.autocomplete;
+      $("pw-hint").hidden = mode !== "signup";
+      $("forgot").hidden = mode !== "signin";
+      $("tab-signin").setAttribute("aria-pressed", String(mode === "signin"));
+      $("tab-signup").setAttribute("aria-pressed", String(mode === "signup"));
+      clearMessage();
+    }
+
+    function setBusy(busy) {
+      submitBtn.disabled = busy;
+      submitBtn.textContent = busy ? COPY[mode].busy : COPY[mode].button;
+    }
+
+    function friendlyError(err) {
+      switch (err && err.code) {
+        case "auth/invalid-email":
+          return "That email address doesn't look right. Check it and try again.";
+        case "auth/missing-password":
+          return "Enter your password.";
+        case "auth/invalid-credential":
+        case "auth/wrong-password":
+        case "auth/user-not-found":
+          return "Email or password is incorrect. Check both, or use Forgot password.";
+        case "auth/email-already-in-use":
+          return "An account with this email already exists. Use Sign in instead.";
+        case "auth/weak-password":
+          return "Choose a password with at least 6 characters.";
+        case "auth/too-many-requests":
+          return "Too many attempts. Wait a few minutes, or reset your password.";
+        case "auth/network-request-failed":
+          return "Can't reach the sign-in service. Check your internet connection.";
+        case "auth/operation-not-allowed":
+          return "Email sign-in isn't turned on for this app yet. Enable Email/Password in Firebase Authentication.";
+        case "auth/user-disabled":
+          return "This account has been disabled.";
+        default:
+          return (err && err.message) || "Something went wrong. Please try again.";
+      }
+    }
+
+    $("tab-signin").addEventListener("click", () => setMode("signin"));
+    $("tab-signup").addEventListener("click", () => setMode("signup"));
+
+    $("pw-toggle").addEventListener("click", () => {
+      const showing = passEl.type === "text";
+      passEl.type = showing ? "password" : "text";
+      $("pw-toggle").textContent = showing ? "Show" : "Hide";
+      $("pw-toggle").setAttribute("aria-label", showing ? "Show password" : "Hide password");
+    });
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearMessage();
+
+      const email = emailEl.value.trim();
+      const password = passEl.value;
+
+      if (!email) { showMessage("Enter your email address.", "error"); emailEl.focus(); return; }
+      if (!password) { showMessage("Enter your password.", "error"); passEl.focus(); return; }
+
+      setBusy(true);
+      try {
+        const credential = mode === "signup"
+          ? await createUserWithEmailAndPassword(auth, email, password)
+          : await signInWithEmailAndPassword(auth, email, password);
+
+        const idToken = await credential.user.getIdToken();
+
+        const response = await fetch("/session-login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ idToken, next: NEXT })
+        });
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(data.error || "We couldn't start your session. Please try again.");
+        }
+        window.location.assign(data.next || "/eligibility");
+      } catch (err) {
+        console.error(err);
+        showMessage(friendlyError(err), "error");
+        setBusy(false);
+      }
+    });
+
+    $("forgot").addEventListener("click", async () => {
+      clearMessage();
+      const email = emailEl.value.trim();
+      if (!email) {
+        showMessage("Enter your email above, then select Forgot password.", "error");
+        emailEl.focus();
+        return;
+      }
+      try {
+        await sendPasswordResetEmail(auth, email);
+        showMessage("If an account exists for " + email + ", a password reset link is on its way. Check your spam folder too.", "ok");
+      } catch (err) {
+        console.error(err);
+        showMessage(friendlyError(err), "error");
+      }
+    });
+  </script>
+</body>
+</html>
